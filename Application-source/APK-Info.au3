@@ -5,7 +5,7 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment=Shows info about Android Package Files (APK)
 #AutoIt3Wrapper_Res_Description=APK-Info
-#AutoIt3Wrapper_Res_Fileversion=1.18.0.0
+#AutoIt3Wrapper_Res_Fileversion=1.19.0.0
 #AutoIt3Wrapper_Res_LegalCopyright=zoster
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
 #pragma compile(AutoItExecuteAllowed True)
@@ -57,8 +57,8 @@ $Inidir = @ScriptDir & "\"
 ;$ProgramVersion=Iniread ($Inidir & $IniProgramSettings, "Settings", "ProgramVersion", "0.7Q");
 ;$ProgramReleaseDate=Iniread ($Inidir & $IniProgramSettings, "Settings", "ProgramReleaseDate", "01.06.2017");
 
-$ProgramVersion = "1.18"
-$ProgramReleaseDate = "16.06.2018"
+$ProgramVersion = "1.19"
+$ProgramReleaseDate = "19.06.2018"
 
 ; more info on country code
 ; https://www.autoitscript.com/autoit3/docs/appendix/OSLangCodes.htm
@@ -72,6 +72,8 @@ Else
 EndIf
 
 $CheckSignature = IniRead($Inidir & $IniProgramSettings, "Settings", "CheckSignature", "1")
+
+$AddBuildNumber = IniRead($Inidir & $IniProgramSettings, "Settings", "AddBuildNumber", "0")
 
 $ShowLog = IniRead($Inidir & $IniProgramSettings, "Settings", "ShowLog", "0")
 $ShowLangCode = IniRead($Inidir & $IniProgramSettings, "Settings", "ShowLangCode", "1")
@@ -411,7 +413,17 @@ Func _OpenNewFile($apk)
 	If $apk_MinSDKVer <> "" Then $sMinAndroidString = 'Android ' & $apk_MinSDKVer & ' (' & $apk_MinSDKName & ')'
 	If $apk_TargetSDKVer <> "" Then $sTgtAndroidString = 'Android ' & $apk_TargetSDKVer & ' (' & $apk_TargetSDKName & ')'
 
-	$sNewFilenameAPK = StringReplace($apk_Label, " ", $FileNameSpace) & $FileNamePrefix & StringReplace($apk_VersionName, " ", $FileNameSpace) & $FileNameSuffix & StringReplace($apk_VersionCode, " ", $FileNameSpace) & ".apk"
+;=============================================================================
+;
+; Check if we want to add build number to version
+;
+;==============================================================================
+
+	If $AddBuildNumber == 1 Then
+		$sNewFilenameAPK = StringReplace($apk_Label, " ", $FileNameSpace) & $FileNamePrefix & StringReplace($apk_VersionName, " ", $FileNameSpace) & $FileNameSuffix & StringReplace($apk_VersionCode, " ", $FileNameSpace) & ".apk"
+	Else
+		$sNewFilenameAPK = StringReplace($apk_Label, " ", $FileNameSpace) & $FileNamePrefix & StringReplace($apk_VersionName, " ", $FileNameSpace) & ".apk"
+	EndIf
 
 	GUICtrlSetData($inpLabel, $apk_Label)
 	GUICtrlSetData($inpVersion, $apk_VersionName)
