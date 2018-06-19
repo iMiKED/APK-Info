@@ -7,7 +7,7 @@ Then was updated by jazzruby and this is the [original jazzruby thread on XDA](h
 
 Then was updated by bovirus and this is the [reworked thread on XDA](https://forum.xda-developers.com/showthread.php?t=3614970)
 
-Then was updated by Enyby https://github.com/Enyby and this is the [reworked thread on XDA] (https://forum.xda-developers.com/showthread.php?t=3614970)
+Then was updated by Enyby https://github.com/Enyby and this is the [reworked thread on XDA](https://forum.xda-developers.com/showthread.php?t=3614970)
 
 # APK-Info functionalities
 - Support up to latest API Levels available
